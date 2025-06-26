@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Last of Us</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        h1 {
+            color: #e0a80d;
+            text-align: center;
+            border-bottom: 2px solid #e0a80d;
+            padding-bottom: 10px;
+            margin-top: 60px;
+        }
+        section {
+            background-color: #2a2a2a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            border-left: 4px solid #e0a80d;
+        }
+        h2 {
+            color: #e0a80d;
+        }
+        button {
+            background-color: #e0a80d;
+            color: #1a1a1a;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #f0b81d;
+        }
+        .game-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+            border-radius: 4px;
+            max-height: 300px;
+        }
+        .image-container {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .image-wrapper {
+            flex: 1;
+            min-width: 250px;
+        }
+        #date-time-section {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 250px;
+            padding: 15px;
+            background-color: #2a2a2a;
+            border-radius: 8px;
+            border-left: 4px solid #e0a80d;
+        }
+        .game-info {
+            line-height: 1.6;
+        }
+        .awards {
+            margin-top: 15px;
+            padding-left: 20px;
+        }
+        .awards li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Seção de Data/Hora no canto superior direito -->
+    <section id="date-time-section">
+        <h3>Relógio do Apocalipse</h3>
+        <p id="date-time-paragraph">--:--:--</p>
+        <button onclick="updateClock()">Atualizar</button>
+    </section>
+
+    <h1>The Last of Us</h1>
+    
+    <!-- Seção 1: Alterar Estilo do Parágrafo -->
+    <section>
+        <h2>História do Jogo</h2>
+        <p id="story-paragraph" class="game-info">
+            The Last of Us é um aclamado jogo de ação-aventura e survival horror desenvolvido pela Naughty Dog e publicado pela Sony Computer Entertainment. 
+            Lançado originalmente em <strong>14 de junho de 2013</strong> para PlayStation 3, o jogo se passa em um mundo pós-apocalíptico devastado por 
+            uma pandemia que transforma humanos em criaturas agressivas. A narrativa acompanha Joel, um sobrevivente endurecido, e Ellie, uma jovem 
+            adolescente que pode ser a chave para uma cura. A jornada emocional dos personagens através dos Estados Unidos em ruínas é o coração da experiência.
+        </p>
+        <button onclick="changeParagraphStyle()">Mudar Estilo do Texto</button>
+    </section>
+    
+    <!-- Seção 2: Curiosidades e Prêmios -->
+    <section>
+        <h2>Curiosidades e Prêmios</h2>
+        <div class="game-info">
+            <p><strong>Curiosidades:</strong></p>
+            <ul>
+                <li>O desenvolvimento do jogo começou em 2009 e levou aproximadamente 4 anos</li>
+                <li>A relação entre Joel e Ellie foi inspirada no filme "Cidade dos Sonhos" (2003)</li>
+                <li>Ellie foi a primeira personagem feminina a estrelar a capa da revista Game Informer em 8 anos</li>
+                <li>O jogo foi relançado como "The Last of Us Remastered" para PS4 em 2014</li>
+                <li>Em 2022, foi lançada uma versão totalmente remake para PS5</li>
+            </ul>
+            
+            <p class="awards-title"><strong>Principais Prêmios:</strong></p>
+            <ul class="awards">
+                <li><strong>BAFTA Games Award</strong> - Melhor Jogo (2013)</li>
+                <li><strong>The Game Awards</strong> - Melhor Narrativa (2013)</li>
+                <li><strong>D.I.C.E. Awards</strong> - Jogo do Ano (2014)</li>
+                <li><strong>Spike VGX</strong> - Jogo do Ano (2013)</li>
+                <li><strong>Golden Joystick Awards</strong> - Melhor Narrativa (2013)</li>
+            </ul>
+        </div>
+    </section>
+    
+    <!-- Seção 3: Trocar Entre Imagens -->
+    <section>
+        <h2>Galeria</h2>
+        <div class="image-container">
+            <div class="image-wrapper">
+                <img id="game-image-1" class="game-image" src="https://antropogamer.com.br/wp-content/uploads/2024/08/The-Last-of-Us%E2%84%A2-Part-II-Remastered_20240609194306-jpg.webp" alt="The Last of Us Part II Remastered">
+            </div>
+            <div class="image-wrapper">
+                <img id="game-image-2" class="game-image" src="https://cdn.ome.lt/0ye3b1ojYyxUZ7Q3IreaNVHq20Y=/770x0/smart/uploads/conteudo/fotos/The_Last_of_Us_Ellie_sozinha.jpg" alt="Ellie Sozinha">
+            </div>
+        </div>
+        <button onclick="switchImages()">Trocar Imagens</button>
+    </section>
+
+    <script>
+        // Função para atualizar o relógio
+        function updateClock() {
+            const paragraph = document.getElementById('date-time-paragraph');
+            const now = new Date();
+            
+            // Formatar hora
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            
+            paragraph.textContent = `${hours}:${minutes}:${seconds}`;
+            
+            // Atualizar automaticamente a cada segundo
+            setTimeout(updateClock, 1000);
+        }
+        
+        // Iniciar o relógio
+        updateClock();
+
+        // Função para alterar o estilo do parágrafo
+        function changeParagraphStyle() {
+            const paragraph = document.getElementById('story-paragraph');
+            const colors = ['#e0a80d', '#ffffff', '#ff5555', '#55ff55', '#5555ff'];
+            const fonts = ['16px', '18px', '20px', '22px', '24px'];
+            
+            // Gerar valores aleatórios
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            const randomFontSize = fonts[Math.floor(Math.random() * fonts.length)];
+            const randomWeight = Math.random() > 0.5 ? 'bold' : 'normal';
+            const randomStyle = Math.random() > 0.5 ? 'italic' : 'normal';
+            
+            // Aplicar estilos
+            paragraph.style.color = randomColor;
+            paragraph.style.fontSize = randomFontSize;
+            paragraph.style.fontWeight = randomWeight;
+            paragraph.style.fontStyle = randomStyle;
+        }
+        
+        // Função para trocar entre as duas novas imagens
+        let currentImageIndex = 0;
+
+        function switchImages() {
+            const image1 = document.getElementById('game-image-1');
+            const image2 = document.getElementById('game-image-2');
+            
+            // Alternar entre as duas imagens
+            if (currentImageIndex === 0) {
+                image1.src = "https://cdn.ome.lt/0ye3b1ojYyxUZ7Q3IreaNVHq20Y=/770x0/smart/uploads/conteudo/fotos/The_Last_of_Us_Ellie_sozinha.jpg";
+                image2.src = "https://antropogamer.com.br/wp-content/uploads/2024/08/The-Last-of-Us%E2%84%A2-Part-II-Remastered_20240609194306-jpg.webp";
+               
